@@ -4,7 +4,8 @@ A searchable, filterable, sortable explorer over **25,000 orders**, built for th
 front-end assignment (**Problem Statement 1**). The interesting part isn't the table — it's how the
 app behaves when the API is slow, flaky, and racing against a fast-typing user.
 
-- **Live demo:** _add Vercel URL here_
+- **Live demo:** https://order-explorer.vercel.app
+  (try a deep link: [/orders/ORD-00007?status=delivered&country=IN](https://order-explorer.vercel.app/orders/ORD-00007?status=delivered&country=IN))
 - **Demo video:** _optional — add link here_
 
 The mock API adds **200 ms – 3 s latency** to every request and **fails ~1 in 10** (a mix of HTTP 500s

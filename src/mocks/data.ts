@@ -37,7 +37,16 @@ const PRODUCTS = [
   'Desk Lamp', 'Noise-cancelling Headphones', 'Smart Watch', 'Portable SSD', 'Ergonomic Mouse',
   'Phone Case', 'Charging Dock', 'Bluetooth Speaker', 'Fitness Band',
 ]
-const CITIES = ['Gurugram', 'Bengaluru', 'Mumbai', 'Delhi', 'Pune', 'London', 'Berlin', 'Dubai', 'Singapore', 'Sydney', 'Toronto', 'Austin']
+const CITIES: Record<Country, readonly string[]> = {
+  IN: ['Gurugram', 'Bengaluru', 'Mumbai', 'Delhi', 'Pune'],
+  US: ['Austin', 'Seattle', 'New York'],
+  GB: ['London', 'Manchester'],
+  DE: ['Berlin', 'Munich'],
+  AE: ['Dubai', 'Abu Dhabi'],
+  SG: ['Singapore'],
+  AU: ['Sydney', 'Melbourne'],
+  CA: ['Toronto', 'Vancouver'],
+}
 
 const STATUS_WEIGHTS: [OrderStatus, number][] = [
   ['delivered', 0.42],
@@ -121,8 +130,8 @@ export function getOrderDetail(id: string): OrderDetail | undefined {
   return {
     ...order,
     lineItems,
-    shippingAddress: `${Math.floor(rand() * 400) + 1}, ${pick(rand, ['MG Road', 'High Street', 'Park Avenue', 'Sector 29', 'Main Street'])}, ${pick(rand, CITIES)}`,
-    phone: `+91 9${String(Math.floor(rand() * 1e9)).padStart(9, '0')}`,
+    shippingAddress: `${Math.floor(rand() * 400) + 1}, ${pick(rand, ['MG Road', 'High Street', 'Park Avenue', 'Sector 29', 'Main Street'])}, ${pick(rand, CITIES[order.country])}`,
+    phone: `+${order.country === 'IN' ? '91' : '1'} 9${String(Math.floor(rand() * 1e9)).padStart(9, '0')}`,
     notes: rand() < 0.3 ? 'Customer requested gift wrapping.' : '',
   }
 }
